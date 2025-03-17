@@ -1,38 +1,141 @@
-.App {
+body {
+  margin: 0;
+  font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  text-align: -webkit-match-parent;
+  text-align: match-parent;
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    text-align: -webkit-match-parent;
+    text-align: match-parent;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+  }
+
+  code {
+    font-family: 'Courier New', Courier, monospace;
+    background: #eee;
+    padding: 2px 4px;
+    border-radius: 4px;
+  }
+
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+    background: #F4EEE0;
+    box-shadow: 0 4px 10px #B8F065;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 20px auto;
+    overflow-y: auto; /* Ensures scrolling when content overflows */
+    height: auto; /* Allows the container to grow with content */
+    min-height: 0; /* Removes minimum height constraint to avoid cutting off */
+  }
+
+  .title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #444;
+  }
+
+  .text-muted {
+    color: #3190c0;
+    margin-bottom: 1.5rem;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 100%; /* Ensures form fits within container */
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .radio-group {
+    display: flex;
+    gap: 10px;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+
+  .btn-primary.submit-button {
+    padding: 10px 15px;
+    background: #B8F065;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .btn-primary.submit-button:hover {
+    background: #b0d193;
+  }
+
+  .prediction {
+    margin-top: 20px;
+    font-size: 1.5rem;
+    color: #6D5D6E;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    color: #444;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+  }
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+}
+.footer {
+  background: transparent; /* Fully transparent background */
+  color: #000000; /* Black text for high contrast */
+  padding: 10px 0;
   text-align: center;
+  font-size: 0.9rem;
+  width: 100%; /* Ensure it spans the container */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Style the link in the footer */
+.footer a {
+  color: #ff9800;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.footer a:hover {
+  color: #e65100;
+  text-decoration: underline;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+code {
+  font-family: 'Courier New', Courier, monospace;
+  background: #eee;
+  padding: 2px 4px;
+  border-radius: 4px;
 }
