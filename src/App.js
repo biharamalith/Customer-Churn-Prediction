@@ -37,7 +37,7 @@ function App() {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
-    return () => unsubscribe();
+    return () => unsubscribe();//cleans up the listener on unmount to prevent memory leaks
   }, []);
 
   const handleChange = (e) => {
@@ -80,24 +80,36 @@ function App() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formData), //matching the Flask API’s expected input format.
       });
       if (!response.ok) {
         const errorData = await response.json();
-        setPrediction(
-          `Error: ${errorData.message || "API request failed"}`
-        );
+        setPrediction(`Error: ${errorData.message || "API request failed"}`);
         return;
       }
-      const data = await response.json();
+      const data = await response.json();//Flask API response with  the updated prediction
       setPrediction(data.Prediction);
-
+  
+      // Get the audio URL from the response headers and play it in the background
+      const audioUrl = response.headers.get("X-Audio-File");
+      console.log("Audio URL:", audioUrl); // Debug: Log the audio URL
+      if (audioUrl) {
+        const audio = new Audio(`http://localhost:5000${audioUrl}`);
+        const playPromise = audio.play();
+        playPromise.catch((err) => {
+          console.error("Audio playback error:", err);
+          if (err.name === "NotAllowedError") {
+            alert("Audio playback was blocked by the browser. Please click OK to enable audio.");
+            audio.play(); // Retry after user interaction
+          }
+        });
+      } else {
+        console.error("X-Audio-File header not found in response");
+      }
+  
       // Store data in Firebase Realtime Database if user is signed in
       if (user) {
-        const userRef = ref(
-          database,
-          `users/${user.uid}/predictions/${Date.now()}`
-        );
+        const userRef = ref(database, `users/${user.uid}/predictions/${Date.now()}`);
         await set(userRef, {
           formData,
           prediction: data.Prediction,
@@ -149,7 +161,7 @@ function App() {
   return (
     <div className="app-container">
       <h1 className="title">Telecom Customer Churn Prediction</h1>
-      <p className="text-muted"style={{ color: '#ffffff' }}>
+      <p className="text-muted" style={{ color: "#ffffff" }}>
         This app uses a machine learning model to predict whether or not a
         customer will churn based on inputs made by the user.{" "}
         <strong>Scroll down to fill all fields.</strong>
@@ -484,20 +496,20 @@ function App() {
         </div>
       </form>
       {prediction && <h2 className="prediction text-center">Prediction: {prediction}</h2>}
-     
-        <footer className="footer mt-5 py-3 text-center">
-               <p>
-                   Developed by{" "}
-                   <a href="https://www.linkedin.com/in/bihara-malith/.com" target="_blank" rel="noopener noreferrer">
-                    Bihara Malith
-                  </a>
-                  {" "}All rights reserved @2025
-               </p>
-        </footer>
-
+      <footer className="footer mt-5 py-3 text-center">
+        <p>
+          Developed by{" "}
+          <a
+            href="https://www.linkedin.com/in/bihara-malith/.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Bihara Malith
+          </a>
+          {" "}All rights reserved @2025
+        </p>
+      </footer>
     </div>
-  
-    
   );
 }
 
