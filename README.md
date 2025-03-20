@@ -31,7 +31,7 @@ This project predicts customer churn in the telecom sector using a Machine Learn
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/yourusername/telecom-churn-prediction.git
+git clone https://github.com/biharamalith/Customer-Churn-Prediction.git
 cd telecom-churn-prediction
 ```
 
@@ -50,7 +50,7 @@ npm run dev
 ```
 
 ## 🔥 How to Use
-1. Open the React frontend at `http://localhost:5173`
+1. Open the React frontend at `http://localhost:5000`
 2. Enter customer details (tenure, monthly charges, etc.)
 3. Hit 'Predict' to get churn prediction
 4. Audio feedback plays if a result is returned
